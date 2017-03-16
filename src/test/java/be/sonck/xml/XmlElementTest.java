@@ -1,10 +1,10 @@
 package be.sonck.xml;
 
+import be.sonck.xml.value.StringValue;
+import junit.framework.TestCase;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
-
-import be.sonck.xml.XmlElement;
-import junit.framework.TestCase;
 
 public class XmlElementTest extends TestCase {
 
@@ -30,7 +30,7 @@ public class XmlElementTest extends TestCase {
 		assertNull("getParent()", xmlElement.getParent());
 		assertEquals("getTag()", "johan", xmlElement.getTag());
 		
-		assertEquals("getValue()", xmlElement.getValue(), "sonck");
+		assertEquals("getValue()", xmlElement.getValue(), new StringValue("sonck"));
 	}
 	
 	public void test3() {
@@ -43,7 +43,7 @@ public class XmlElementTest extends TestCase {
 		assertNull("getParent()", xmlElement.getParent());
 		assertEquals("getTag()", "johan", xmlElement.getTag());
 		
-		assertEquals("getValue()", xmlElement.getValue(), "& sara");
+		assertEquals("getValue()", xmlElement.getValue(), new StringValue("& sara"));
 	}
 	
 	public void test4() {
@@ -56,7 +56,7 @@ public class XmlElementTest extends TestCase {
 		assertTrue("getChildren() is not empty", xmlElement.getChildren().size() == 0);
 		assertNull("getParent()", xmlElement.getParent());
 		assertEquals("getTag()", "johan", xmlElement.getTag());
-		assertEquals("getValue()", xmlElement.getValue(), "sonck");
+		assertEquals("getValue()", xmlElement.getValue(), new StringValue("sonck"));
 		
 		assertNotNull("getAttributes()", xmlElement.getAttributes());
 		assertEquals("getAttributes()", 2, xmlElement.getAttributes().size());
@@ -81,7 +81,7 @@ public class XmlElementTest extends TestCase {
 		assertNotNull("getParent()", xmlElement.getParent());
 		assertTrue("getParent() is invalid", xmlElement.getParent() == parent);
 		assertEquals("getTag()", "johan", xmlElement.getTag());
-		assertEquals("getValue()", xmlElement.getValue(), "sonck");
+		assertEquals("getValue()", xmlElement.getValue(), new StringValue("sonck"));
 		assertNotNull("getAttributes()", xmlElement.getAttributes());
 		assertEquals("getAttributes()", 2, xmlElement.getAttributes().size());
 		assertTrue("attribute 'straat' is missing", xmlElement.getAttributes().containsKey("straat"));
@@ -144,7 +144,7 @@ public class XmlElementTest extends TestCase {
 		assertNotNull("getParent()", xmlElement.getParent());
 		assertTrue("getParent() is invalid", xmlElement.getParent() == parent);
 		assertEquals("getTag()", "johan", xmlElement.getTag());
-		assertEquals("getValue()", xmlElement.getValue(), "sonck");
+		assertEquals("getValue()", xmlElement.getValue(), new StringValue("sonck"));
 		assertNotNull("getAttributes()", xmlElement.getAttributes());
 		assertEquals("getAttributes()", 2, xmlElement.getAttributes().size());
 		assertTrue("attribute 'straat' is missing", xmlElement.getAttributes().containsKey("straat"));

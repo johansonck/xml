@@ -1,20 +1,15 @@
 package be.sonck.xml;
 
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import be.sonck.xml.value.StringValue;
 import junit.framework.TestCase;
-
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import be.sonck.xml.XmlElement;
-import be.sonck.xml.XmlElementHandler;
-import be.sonck.xml.XmlElementToObjectConverter;
-import be.sonck.xml.XmlHandlerListener;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class XmlElementHandlerTest extends TestCase {
 	
@@ -105,7 +100,7 @@ public class XmlElementHandlerTest extends TestCase {
 		assertEquals("second child's attributes", 0, child.getAttributes().size());
 		assertEquals("second child's children", 0, child.getChildren().size());
 		assertEquals("second child's tag", "birth", child.getTag());
-		assertEquals("second child's value", "20-10-1972", child.getValue());
+		assertEquals("second child's value", new StringValue("20-10-1972"), child.getValue());
 		
 		child = children.get(0);
 		assertEquals("first child's attributes", 0, child.getAttributes().size());
@@ -118,13 +113,13 @@ public class XmlElementHandlerTest extends TestCase {
 		assertEquals("first child's attributes", 0, child.getAttributes().size());
 		assertEquals("first child's children", 0, child.getChildren().size());
 		assertEquals("first child's tag", "first", child.getTag());
-		assertEquals("first child's value", "Johan", child.getValue());
+		assertEquals("first child's value", new StringValue("Johan"), child.getValue());
 
 		child = children.get(1);
 		assertEquals("first child's attributes", 0, child.getAttributes().size());
 		assertEquals("first child's children", 0, child.getChildren().size());
 		assertEquals("first child's tag", "last", child.getTag());
-		assertEquals("first child's value", "Sonck", child.getValue());
+		assertEquals("first child's value", new StringValue("Sonck"), child.getValue());
 	}
 	
 	private void checkSecondElement(XmlElement xmlElement) {
@@ -144,7 +139,7 @@ public class XmlElementHandlerTest extends TestCase {
 		assertEquals("second child's attributes", 0, child.getAttributes().size());
 		assertEquals("second child's children", 0, child.getChildren().size());
 		assertEquals("second child's tag", "birth", child.getTag());
-		assertEquals("second child's value", "05-11-1975", child.getValue());
+		assertEquals("second child's value", new StringValue("05-11-1975"), child.getValue());
 		
 		child = children.get(0);
 		assertEquals("first child's attributes", 0, child.getAttributes().size());
@@ -157,13 +152,13 @@ public class XmlElementHandlerTest extends TestCase {
 		assertEquals("first child's attributes", 0, child.getAttributes().size());
 		assertEquals("first child's children", 0, child.getChildren().size());
 		assertEquals("first child's tag", "first", child.getTag());
-		assertEquals("first child's value", "Sara", child.getValue());
+		assertEquals("first child's value", new StringValue("Sara"), child.getValue());
 		
 		child = children.get(1);
 		assertEquals("first child's attributes", 0, child.getAttributes().size());
 		assertEquals("first child's children", 0, child.getChildren().size());
 		assertEquals("first child's tag", "last", child.getTag());
-		assertEquals("first child's value", "Burm", child.getValue());
+		assertEquals("first child's value", new StringValue("Burm"), child.getValue());
 	}
 	
 	private void checkThirdElement(XmlElement xmlElement) {
@@ -179,13 +174,13 @@ public class XmlElementHandlerTest extends TestCase {
 		assertEquals("first child's attributes", 0, child.getAttributes().size());
 		assertEquals("first child's children", 0, child.getChildren().size());
 		assertEquals("first child's tag", "brand", child.getTag());
-		assertEquals("first child's value", "Canon", child.getValue());
+		assertEquals("first child's value", new StringValue("Canon"), child.getValue());
 		
 		child = children.get(1);
 		assertEquals("second child's attributes", 0, child.getAttributes().size());
 		assertEquals("second child's children", 0, child.getChildren().size());
 		assertEquals("second child's tag", "model", child.getTag());
-		assertEquals("second child's value", "Ixus 55", child.getValue());
+		assertEquals("second child's value", new StringValue("Ixus 55"), child.getValue());
 	}
 	
 	private void checkFourthElement(XmlElement xmlElement) {
@@ -201,12 +196,12 @@ public class XmlElementHandlerTest extends TestCase {
 		assertEquals("first child's attributes", 0, child.getAttributes().size());
 		assertEquals("first child's children", 0, child.getChildren().size());
 		assertEquals("first child's tag", "brand", child.getTag());
-		assertEquals("first child's value", "Nikon", child.getValue());
+		assertEquals("first child's value", new StringValue("Nikon"), child.getValue());
 		
 		child = children.get(1);
 		assertEquals("second child's attributes", 0, child.getAttributes().size());
 		assertEquals("second child's children", 0, child.getChildren().size());
 		assertEquals("second child's tag", "model", child.getTag());
-		assertEquals("second child's value", "D60", child.getValue());
+		assertEquals("second child's value", new StringValue("D60"), child.getValue());
 	}
 }
