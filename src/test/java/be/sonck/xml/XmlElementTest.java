@@ -6,6 +6,8 @@ import junit.framework.TestCase;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class XmlElementTest extends TestCase {
 
 	public void test1() {
@@ -160,5 +162,13 @@ public class XmlElementTest extends TestCase {
 		
 		assertTrue("parent.getChildren() doesn't contain 'johan'", parent.getChildren().contains(xmlElement));
 		assertTrue("parent.getChildren() doesn't contain 'sara'", parent.getChildren().contains(sibling));
+	}
+
+	public void testPrintWithAttributes() {
+		XmlElement xmlElement = new XmlElement("li", "value");
+		xmlElement.addAttribute("class", "test");
+
+		String string = xmlElement.toString(false);
+		assertThat(string).isEqualTo("<li class=\"test\">value</li>");
 	}
 }

@@ -178,7 +178,7 @@ public class XmlElement {
     }
 
     private void writeAttributes(PrintWriter printWriter) {
-        if (attributes != null) return;
+        if (attributes == null) return;
 
         for (String key : attributes.keySet()) {
             if (key == null) continue;
