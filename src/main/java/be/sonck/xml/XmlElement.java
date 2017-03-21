@@ -16,8 +16,8 @@ import java.util.*;
 public class XmlElement {
     private String tag;
     private XmlValue xmlValue;
-    private Map<String, String> attributes;
-    private List<XmlElement> children;
+    private Map<String, String> attributes = new HashMap<>();
+    private List<XmlElement> children = new ArrayList<>();
     private XmlElement parent;
 
     public static final String HEADER = "<?xml version='1.0' encoding='utf-8'?>";
@@ -39,14 +39,12 @@ public class XmlElement {
     }
 
     public XmlElement(XmlElement parent, String tag, String value) {
-        this(parent, tag, new StringValue(value));
+        this(parent, tag, value == null ? null : new StringValue(value));
     }
 
     public XmlElement(XmlElement parent, String tag, XmlValue xmlValue) {
         this.tag = tag;
         this.xmlValue = xmlValue;
-        this.attributes = new HashMap<>();
-        this.children = new ArrayList<>();
 
         if (parent != null) {
             parent.addChild(this);
@@ -55,6 +53,23 @@ public class XmlElement {
 
     public Map<String, String> getAttributes() {
         return Collections.unmodifiableMap(this.attributes);
+    }
+
+    public String getAttribute(String name) {
+        return getAttributes().get(name);
+    }
+
+    /**
+     * Add an attribute to the XmlElement with the given name and value.
+     *
+     * @param name  String
+     * @param value String
+     * @return A reference to self.
+     */
+    public XmlElement setAttribute(String name, String value) {
+        attributes.put(name, value);
+
+        return this;
     }
 
     public List<XmlElement> getChildren() {
@@ -78,20 +93,7 @@ public class XmlElement {
     }
 
     public void setValue(String value) {
-        setValue(new StringValue(value));
-    }
-
-    /**
-     * Add an attribute to the XmlElement with the given name and value.
-     *
-     * @param name  String
-     * @param value String
-     * @return A reference to self.
-     */
-    public XmlElement addAttribute(String name, String value) {
-        attributes.put(name, value);
-
-        return this;
+        setValue(value == null ? null : new StringValue(value));
     }
 
     /**
@@ -117,6 +119,55 @@ public class XmlElement {
 
     public String prettyPrint(int indentation, boolean writeNewLine) {
         return prettyPrint(indentation, 0, writeNewLine);
+    }
+
+    /**
+     * Construct a String representation of this XmlElement and its children.
+     *
+     * @return String
+     */
+    public String toString() {
+        return toString(true);
+    }
+
+    public String toString(boolean writeNewLine) {
+        return prettyPrint(0, writeNewLine);
+    }
+
+    /**
+     * Adds the padding chars to the left of the source. If the maxLengthOfString is smaller than
+     * the length of the source String no chars are added. The paddingChars String is always added
+     * completely (not chopped) until the maxLengthOfString is reached.
+     *
+     * @param source            String
+     * @param paddingChars      String
+     * @param maxLengthOfString int
+     * @return String
+     */
+    public static String padLeft(String source, String paddingChars, int maxLengthOfString) {
+        StringBuffer buffer = new StringBuffer(source == null ? "" : source);
+        while (buffer.length() + paddingChars.length() <= maxLengthOfString) {
+            buffer.insert(0, paddingChars);
+        }
+
+        return buffer.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        XmlElement that = (XmlElement) o;
+        return Objects.equals(tag, that.tag) &&
+                Objects.equals(xmlValue, that.xmlValue) &&
+                Objects.equals(attributes, that.attributes) &&
+                Objects.equals(children, that.children) &&
+                Objects.equals(parent, that.parent);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tag, xmlValue, attributes, children, parent);
     }
 
     private String prettyPrint(int indentation, int startIndent, boolean writeNewLine) {
@@ -191,38 +242,6 @@ public class XmlElement {
             printWriter.print(value == null ? "" : value);
             printWriter.print('"');
         }
-    }
-
-    /**
-     * Construct a String representation of this XmlElement and its children.
-     *
-     * @return String
-     */
-    public String toString() {
-        return toString(true);
-    }
-
-    public String toString(boolean writeNewLine) {
-        return prettyPrint(0, writeNewLine);
-    }
-
-    /**
-     * Adds the padding chars to the left of the source. If the maxLengthOfString is smaller than
-     * the length of the source String no chars are added. The paddingChars String is always added
-     * completely (not chopped) until the maxLengthOfString is reached.
-     *
-     * @param source            String
-     * @param paddingChars      String
-     * @param maxLengthOfString int
-     * @return String
-     */
-    public static String padLeft(String source, String paddingChars, int maxLengthOfString) {
-        StringBuffer buffer = new StringBuffer(source == null ? "" : source);
-        while (buffer.length() + paddingChars.length() <= maxLengthOfString) {
-            buffer.insert(0, paddingChars);
-        }
-        return buffer.toString();
-
     }
 }
 

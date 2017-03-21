@@ -51,8 +51,8 @@ public class XmlElementTest extends TestCase {
 	public void test4() {
 		XmlElement xmlElement = new XmlElement("johan", "sonck");
 		
-		xmlElement.addAttribute("straat", "Reetsesteenweg");
-		xmlElement.addAttribute("huisnummer", "198");
+		xmlElement.setAttribute("straat", "Reetsesteenweg");
+		xmlElement.setAttribute("huisnummer", "198");
 		
 		assertNotNull("getChildren()", xmlElement.getChildren());
 		assertTrue("getChildren() is not empty", xmlElement.getChildren().size() == 0);
@@ -75,8 +75,8 @@ public class XmlElementTest extends TestCase {
 		XmlElement xmlElement = new XmlElement(parent, "johan", "sonck");
 		XmlElement sibling = new XmlElement(parent, "sara", "burm");
 		
-		xmlElement.addAttribute("straat", "Reetsesteenweg");
-		xmlElement.addAttribute("huisnummer", "198");
+		xmlElement.setAttribute("straat", "Reetsesteenweg");
+		xmlElement.setAttribute("huisnummer", "198");
 		
 		assertNotNull("getChildren()", xmlElement.getChildren());
 		assertTrue("getChildren() is not empty", xmlElement.getChildren().size() == 0);
@@ -138,8 +138,8 @@ public class XmlElementTest extends TestCase {
 		XmlElement sibling = new XmlElement("sara", "burm");
 		parent.addChild(sibling);
 		
-		xmlElement.addAttribute("straat", "Reetsesteenweg");
-		xmlElement.addAttribute("huisnummer", "198");
+		xmlElement.setAttribute("straat", "Reetsesteenweg");
+		xmlElement.setAttribute("huisnummer", "198");
 		
 		assertNotNull("getChildren()", xmlElement.getChildren());
 		assertTrue("getChildren() is not empty", xmlElement.getChildren().size() == 0);
@@ -166,7 +166,7 @@ public class XmlElementTest extends TestCase {
 
 	public void testPrintWithAttributes() {
 		XmlElement xmlElement = new XmlElement("li", "value");
-		xmlElement.addAttribute("class", "test");
+		xmlElement.setAttribute("class", "test");
 
 		String string = xmlElement.toString(false);
 		assertThat(string).isEqualTo("<li class=\"test\">value</li>");

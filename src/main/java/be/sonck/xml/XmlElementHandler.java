@@ -1,13 +1,13 @@
 package be.sonck.xml;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Creates XmlElement objects based on the parsed data.
@@ -78,7 +78,7 @@ public class XmlElementHandler<T> extends DefaultHandler {
 				String attributeName = attributes.getLocalName(i);
 				String attributeValue = attributes.getValue(i);
 				
-				currentElement.addAttribute(attributeName, attributeValue);
+				currentElement.setAttribute(attributeName, attributeValue);
 			}
 		}
 	}
